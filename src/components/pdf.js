@@ -42,13 +42,13 @@ export class MyPdfViewer extends Component {
   }
 } */
 
-import React, { useState } from 'react';
-import Pdf from '@mikecousins/react-pdf';
+import React/*, { useState } */ from 'react';
+/* import Pdf from '@mikecousins/react-pdf'; */
 
 import pdf from "../prova.pdf";
 
 export const MyPdfViewer = () => {
-  const [page, setPage] = useState(1);
+  /* const [page, setPage] = useState(1); */
 
   return (
     /*     <Pdf file={pdf} page={page} scale="1">
