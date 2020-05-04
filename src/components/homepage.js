@@ -7,7 +7,9 @@ import { Alcaline } from './alcaline.js';
 import { Property } from './property.js';
 import { Application } from './application.js';
 import { Curing } from './curing.js';
-import { MyPdfViewer } from './pdf.js';
+/* import { MyPdfViewer } from './pdf.js'; */
+
+import FileUpload from './fileUpload.js';
 
 export default class HomePage extends Component {
 
@@ -181,7 +183,10 @@ export default class HomePage extends Component {
                             <label className="custom-file-label" htmlFor="inputGroupFile02" aria-describedby="inputGroupFileAddon02">Choose file</label>
                         </div>
                     </div> */}
-                    <MyPdfViewer />
+                    
+                    <FileUpload />
+
+                    {/* <MyPdfViewer /> */}
                 </div>
                 <div className="col" style={{ marginTop: 20 }}>
                     <form onSubmit={this.onSubmit}>

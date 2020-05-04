@@ -1,4 +1,5 @@
 const express = require('express');
+const fileUpload = require('express-fileupload');
 const app = express();
 const bodyParser = require('body-parser'); //middleware
 const cors = require('cors'); //middleware
@@ -10,6 +11,7 @@ let Material = require('./material.model');
 
 app.use(cors());
 app.use(bodyParser.json());
+app.use(fileUpload());
 
 mongoose.connect('mongodb://127.0.0.1:27017/materials', { useNewUrlParser: true, useUnifiedTopology: true }); //connection to the db
 const connection = mongoose.connection; //connection reference
@@ -70,6 +72,27 @@ materialRoutes.route('/update/:id').post(function (req, res) {
         }
     });
 });
+
+//Upload Endpoint
+materialRoutes.route('/upload').post((req, res) => {
+    if(req.files === null){
+        return res.status(400).json({ msg: 'No file uploaded'});
+    }
+
+    const file = req.files.file;
+
+    /* ${_dirname} */
+    file.mv(`../public/uploads/${file.name}`, err => {
+        if(err){
+            console.error(err);
+            return res.status(500).send(err);
+        }
+
+        res.json({ fileName: file.name, filePath: `/uploads/${file.name}`});
+
+    })
+
+})
 
 app.use('/materials', materialRoutes);
 
