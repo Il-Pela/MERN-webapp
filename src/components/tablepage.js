@@ -1,13 +1,8 @@
 import React, { Component } from 'react';
 
-import Table from './tableOrder.js';
+import Table from './table.js';
 
 export default class TablePage extends Component {
-
-    constructor(props) {
-        super(props);
-
-    }
 
     render() {
         return (

@@ -4,7 +4,7 @@ import axios from 'axios';
 import Message from './message';
 import Progress from './progress';
 
-const FileUpload = () => {
+const FileUpload = (props) => {
 
     const [file, setFile] = useState('');
     const [fileName, setFileName] = useState('Choose File');
@@ -12,15 +12,22 @@ const FileUpload = () => {
     const [message, setMessage] = useState('');
     const [uploadPercentage, setUploadPercentage] = useState(0);
 
+    /* useEffect(() => {
+        setUploadedFile("old", props.src)
+        console.log(uploadedFile)}, [props, uploadedFile]); */
+
     const onChange = e => {
+        
         setFile(e.target.files[0]);
-        console.log(e.target.files[0].name);
+        /* console.log(e.target.files[0].name); */
         setFileName(e.target.files[0].name);
         setUploadedFile({});
     }
 
     const onSubmit = async e => {
         e.preventDefault();
+
+        setUploadedFile({});
 
         const formData = new FormData();
         formData.append('file', file);
@@ -38,7 +45,6 @@ const FileUpload = () => {
                     setTimeout(() => setUploadPercentage(0), 5000);
                 }
 
-
             });
 
             const { fileName, filePath } = res.data;
@@ -54,6 +60,8 @@ const FileUpload = () => {
             }
         }
 
+/*         console.log(uploadedFile);
+        props.onChange(uploadedFile); */
     }
 
     return (

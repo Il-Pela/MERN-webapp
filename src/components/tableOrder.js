@@ -49,11 +49,11 @@ const Material = (props) => {
             <thead>
                 <tr>
                     <th className="th-sm" style={{ backgroundColor: 'powderblue' }}>
-                        {/* <button type="button"
+                        <button type="button"
                             onClick={() => requestSort('material_name')}
                             className={getClassNamesFor('material_name')}>
                             MaterialName
-                        </button> */}
+                        </button>
                         MaterialName
                     </th>
                     <th colSpan="10" style={{ backgroundColor: 'coral' }}> ChemicalComposition</th>
@@ -62,11 +62,11 @@ const Material = (props) => {
                     <th></th>
 
                     <th>
-                        {/* <button type="button"
+                        <button type="button"
                             onClick={() => requestSort('chemical_composition.SiO2')}
                             className={getClassNamesFor('chemical_composition.SiO2')}>
                             SiO2
-                        </button> */}
+                        </button>
                         SiO2
                     </th>
                     <th>Al2O3</th>
@@ -113,7 +113,8 @@ export default class Table extends React.Component {
 
     }
 
-    componentDidMount() {
+//function for load table
+/*     componentDidMount() {
         axios.get('http://localhost:4000/materials')
             .then(res => {
                 this.setState({ materials: res.data });
@@ -121,15 +122,12 @@ export default class Table extends React.Component {
             .catch(function (err) {
                 console.log(err);
             });
-    }
+    } */
 
     render() {
         return (
             <Material materials={this.state.materials} />
         )
-
-
-
         /* ); */
     }
 }

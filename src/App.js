@@ -1,16 +1,55 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom';
 import "bootstrap/dist/css/bootstrap.min.css";
 import "react-bootstrap-range-slider/dist/react-bootstrap-range-slider.css";
 
 import HomePage from "./components/homepage";
 import TablePage from "./components/tablepage";
 
-/* import CreateTodo from './components/create-todo.component';
-import EditTodo from './components/edit-todo.component';
-import TodosList from './components/todos-list.component'; */
-
 class App extends Component {
+
+  constructor(props) {
+    super(props);
+
+    this.update = this.update.bind(this);
+
+    this.state = {
+      material_name: '',
+      chemical_composition: {
+        SiO2: '',
+        Al2O3: '',
+        NaO3: '',
+        Fe2O3: '',
+        K2O: '',
+        TiO2: '',
+        CaO: '',
+        MgO: '',
+        P2O5: '',
+        SO3: ''
+      },
+      alcaline: {
+        MOH: '',
+        M2: '',
+        M: '',
+        RM: '',
+      },
+      property: {
+        first: '',
+        second: ''
+      },
+      application: '',
+      curing: {
+        value: Number(0),
+        time: ''
+      },
+      filename: ''
+    };
+  }
+
+  update = async function(currState) {
+    await this.setState(currState);
+  }
+
   render() {
     return (
       <Router>
@@ -28,8 +67,21 @@ class App extends Component {
               </ul>
             </div>
           </nav>
-          <Route path="/" exact component={HomePage} />
-          <Route path="/table" component={TablePage} />
+
+
+          {/* <Route path="/" exact component={HomePage} />
+          <Route path="/table" component={TablePage} /> */}
+
+          <Switch>
+            <Route path="/table">
+              <TablePage />
+            </Route>
+            <Route path="/">
+              <HomePage onChange={this.update}
+                        material={this.state}
+              />
+            </Route>
+          </Switch>
 
         </div>
 

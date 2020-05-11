@@ -1,5 +1,5 @@
 import React from 'react';
-import axios from 'axios';
+/* import axios from 'axios'; */
 
 const Row = (props) => {
     return (
@@ -35,7 +35,7 @@ export default class Table extends React.Component {
 
     }
 
-    componentDidMount() {
+/*     componentDidMount() {
         axios.get('http://localhost:4000/materials')
             .then(res => {
                 this.setState({ materials: res.data });
@@ -43,7 +43,7 @@ export default class Table extends React.Component {
             .catch(function (err) {
                 console.log(err);
             });
-    }
+    } */
 
     materialList() {
         /*         return this.state.materials.map(function (currentMat, index) { */

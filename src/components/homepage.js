@@ -23,118 +23,70 @@ export default class HomePage extends Component {
         this.changeApplication = this.changeApplication.bind(this);
         this.changeCuring = this.changeCuring.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
+
+        this.changePDF = this.changePDF.bind(this);
         
-/*         this.state = {
-            material_name: '',
-            chemical_composition: {
-                SiO2: '',
-                Al2O3: '',
-                NaO3: '',
-                Fe2O3: '',
-                K2O: '',
-                TiO2: '',
-                CaO: '',
-                MgO: '',
-                P2O5: '',
-                SO3: ''
-            },
-            alcaline: {
-                MOH: '',
-                M2: '',
-                M: '',
-                RM: '',
-            },
-            property: {
-                first: '',
-                second: ''
-            },
-            application: '',
-            curing: {
-                value: Number(0),
-                time: ''
-            },
-        }; */
+        this.state = this.props.material;
     }
 
-    componentWillMount(){
-        this.state = {
-            material_name: '',
-            chemical_composition: {
-                SiO2: '',
-                Al2O3: '',
-                NaO3: '',
-                Fe2O3: '',
-                K2O: '',
-                TiO2: '',
-                CaO: '',
-                MgO: '',
-                P2O5: '',
-                SO3: ''
-            },
-            alcaline: {
-                MOH: '',
-                M2: '',
-                M: '',
-                RM: '',
-            },
-            property: {
-                first: '',
-                second: ''
-            },
-            application: '',
-            curing: {
-                value: Number(0),
-                time: ''
-            },
-        };
-    }
-
-    changeName(newName) {
-        this.setState({
+    changeName = async function(newName) {
+        await this.setState({
             material_name: newName
         });
+
+        this.props.onChange(this.state);
     }
 
-    changeChemicals(name, value) {
+    changeChemicals = async function(name, value) {
         var some = { ...this.state.chemical_composition, [name]: value };
 
-        this.setState({
+        await this.setState({
             chemical_composition: some
         });
+
+        this.props.onChange(this.state);
     }
 
-    changeAlcaline(name, value) {
+    changeAlcaline = async function(name, value) {
         var some = { ...this.state.alcaline, [name]: value };
 
-        this.setState({
+        await this.setState({
             alcaline: some
         });
+
+        this.props.onChange(this.state);
     }
 
-    changeProperty(name, value) {
+    changeProperty = async function(name, value) {
 
         var some = { ...this.state.property, [name]: value };
 
-        this.setState({
+        await this.setState({
             property: some
         });
+
+        this.props.onChange(this.state);
     }
 
-    changeApplication(newName) {
-        this.setState({
+    changeApplication = async function(newName) {
+        await this.setState({
             application: newName
         });
+
+        this.props.onChange(this.state);
     }
 
-    changeCuring(name, value) {
+    changeCuring = async function(name, value) {
         var some = { ...this.state.curing, [name]: value };
 
-        this.setState({
+        await this.setState({
             curing: some
         });
+
+        this.props.onChange(this.state);
     }
 
-    onSubmit(e) {
+    onSubmit = async function(e) {
         e.preventDefault();
 
         console.log('Form submitted: ');
@@ -174,7 +126,7 @@ export default class HomePage extends Component {
             .then(res => console.log(res.data));
 
         //restore homepage
-        this.setState({
+        let cancel = {
             material_name: '',
             chemical_composition: {
                 SiO2: '',
@@ -203,7 +155,20 @@ export default class HomePage extends Component {
                 value: Number(0),
                 time: ''
             },
+            filename: ''
+        };
+
+        await this.setState(cancel);
+
+        this.props.onChange(this.state);
+    }
+
+    changePDF = async function(uploadedFile){
+        await this.setState({
+            filename: uploadedFile
         });
+
+        this.props.onChange(this.state);
     }
 
     render() {
@@ -217,7 +182,8 @@ export default class HomePage extends Component {
                         </div>
                     </div> */}
                     
-                    <FileUpload />
+                    <FileUpload src={this.state.filename}
+                                onChange={this.changePDF}/>
 
                     {/* <MyPdfViewer /> */}
                 </div>
