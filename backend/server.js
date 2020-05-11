@@ -63,32 +63,37 @@ materialRoutes.route('/update/:id').post(function (req, res) {
 
             //in the end we have to save the update
             material.save()
-                    .then(material => {
-                        res.json('Todo updated')
-                    })
-                    .catch(err => {
-                        res.status(400).send('Update not possible');
-                    });
+                .then(material => {
+                    res.json('Todo updated')
+                })
+                .catch(err => {
+                    res.status(400).send('Update not possible');
+                });
         }
     });
 });
 
 //Upload Endpoint
 materialRoutes.route('/upload').post((req, res) => {
-    if(req.files === null){
-        return res.status(400).json({ msg: 'No file uploaded'});
+    if (req.files === null) {
+        return res.status(400).json({ msg: 'No file uploaded' });
     }
 
     const file = req.files.file;
 
+    var fs = require('fs');
+    var filePath = `../public/uploads/${file.name}`;
+    if(fs.existsSync(filePath))
+        fs.unlinkSync(filePath);
+
     /* ${_dirname} */
     file.mv(`../public/uploads/${file.name}`, err => {
-        if(err){
+        if (err) {
             console.error(err);
             return res.status(500).send(err);
         }
 
-        res.json({ fileName: file.name, filePath: `/uploads/${file.name}`});
+        res.json({ fileName: file.name, filePath: `/uploads/${file.name}` });
 
     })
 

@@ -10,6 +10,7 @@ export class Name extends React.Component {
 
     handleChange(e) {
         const name = e.target.value;
+        //name.charAt(0).toUpperCase() + name.slice(1).toLowerCase()
         this.props.onChange(name);
     }
 
@@ -26,6 +27,7 @@ export class Name extends React.Component {
                             placeholder="Material"
                             value={this.props.name}
                             onChange={this.handleChange}
+//                            style={{textTransform: "capitalize"}}
                             />
                 </div>
             </div>

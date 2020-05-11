@@ -23,7 +23,40 @@ export default class HomePage extends Component {
         this.changeApplication = this.changeApplication.bind(this);
         this.changeCuring = this.changeCuring.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
+        
+/*         this.state = {
+            material_name: '',
+            chemical_composition: {
+                SiO2: '',
+                Al2O3: '',
+                NaO3: '',
+                Fe2O3: '',
+                K2O: '',
+                TiO2: '',
+                CaO: '',
+                MgO: '',
+                P2O5: '',
+                SO3: ''
+            },
+            alcaline: {
+                MOH: '',
+                M2: '',
+                M: '',
+                RM: '',
+            },
+            property: {
+                first: '',
+                second: ''
+            },
+            application: '',
+            curing: {
+                value: Number(0),
+                time: ''
+            },
+        }; */
+    }
 
+    componentWillMount(){
         this.state = {
             material_name: '',
             chemical_composition: {

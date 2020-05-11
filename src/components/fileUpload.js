@@ -14,11 +14,14 @@ const FileUpload = () => {
 
     const onChange = e => {
         setFile(e.target.files[0]);
+        console.log(e.target.files[0].name);
         setFileName(e.target.files[0].name);
+        setUploadedFile({});
     }
 
     const onSubmit = async e => {
         e.preventDefault();
+
         const formData = new FormData();
         formData.append('file', file);
 
@@ -31,8 +34,8 @@ const FileUpload = () => {
                 onUploadProgress: progressEvent => {
                     setUploadPercentage(parseInt(Math.round((progressEvent.loaded * 100) / progressEvent.total)));
 
-                    //clear percentage afret 10 sec
-                    setTimeout(() => setUploadPercentage(0), 10000);
+                    //clear percentage afret 5 sec
+                    setTimeout(() => setUploadPercentage(0), 5000);
                 }
 
 
@@ -55,7 +58,7 @@ const FileUpload = () => {
 
     return (
         <Fragment>
-            { message ? <Message msg={message} /> : null }
+            {message ? <Message msg={message} /> : null}
             <form onSubmit={onSubmit}>
                 <div className="custom-file mb-4">
                     <input type="file"
@@ -67,23 +70,20 @@ const FileUpload = () => {
                     </label>
                 </div>
 
-                <Progress percentage={uploadPercentage}/>
+                <Progress percentage={uploadPercentage} />
 
                 <input type="submit" value="Upload" className="btn btn-primary btn-block mt-4" />
 
             </form>
             {uploadedFile ?
                 <div>
-                    {/* <h3 className="text-center"> {uploadedFile.fileName} </h3>
-                    <img style={{ width: '100%' }}
-                            src={uploadedFile.filePath}
-                            alt="" /> */}
                     <object data={uploadedFile.filePath}
                         type="application/pdf"
                         width="100%"
                         height="700"
                         frameBorder="0"
-                        scrolling="auto">
+                        scrolling="auto"
+                        style={{marginTop: 20}}>
                     </object>
                 </div> : null}
         </Fragment>
